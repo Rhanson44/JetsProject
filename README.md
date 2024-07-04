@@ -50,9 +50,9 @@ width= "50" height= "50"> Git </p>
 ### *Concepts Utilized*
 
 > Java Interfaces
-> Abstract Classes
-> ArrayList
-> Input/Output Streams
+  Abstract Classes
+  ArrayList
+  Input/Output Streams
 > Abstraction, Polymorphism, Inheritance, Encapsulation
 
 ### *Lessons Learned*
