@@ -9,7 +9,12 @@ public abstract class Jet {
 	
 	public abstract void fly();
 	
-	public Jet(String model, double speed, int range, long price) {}
+	public Jet(String model, double speed, int range, long price) {
+		this.model = model;
+		this.speed = speed;
+		this.range = range;
+		this.price = price;
+	}
 
 	public String getModel() {
 		return model;
@@ -45,7 +50,7 @@ public abstract class Jet {
 
 	@Override
 	public String toString() {
-		return "Jet [model=" + model + ", speed=" + speed + ", range=" + range + ", price=" + price + "]";
+		return "'" + getClass().getSimpleName() + ": model - " + model + ", speed - " + speed + ", range - " + range + ", price - " + price + "'";
 	}
 	
 }

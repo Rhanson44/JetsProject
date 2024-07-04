@@ -8,12 +8,13 @@ public class CargoJet extends Jet implements CargoCarrier{
 
 	@Override
 	public void fly() {
-		System.out.println("I'm soaring!");
+		double flightPath = this.getSpeed() / this.getRange();
+		System.out.println(this.toString() + " can travel " + flightPath + " miles");	
 	}
 
 	@Override
 	public String toString() {
-		return "CargoJet= [" + super.toString() + "]";
+		return super.toString();
 	}
 
 	@Override

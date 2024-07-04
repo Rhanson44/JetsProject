@@ -8,12 +8,13 @@ public class PassengerJet extends Jet{
 
 	@Override
 	public void fly() {
-		this.toString();
+		double flightPath = this.getSpeed() / this.getRange();
+		System.out.println(this.toString() + " can travel " + flightPath + " miles");
 	}
 
 	@Override
 	public String toString() {
-		return "PassengerJet =[" + super.toString() + "]";
+		return super.toString();
 	}
 
 }
