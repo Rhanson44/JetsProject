@@ -8,7 +8,7 @@ public class CargoJet extends Jet implements CargoCarrier{
 
 	@Override
 	public void fly() {
-		double flightPath = this.getSpeed() / this.getRange();
+		double flightPath = this.getRange() * this.getSpeed();
 		System.out.println(this.toString() + " can travel " + flightPath + " miles");	
 	}
 
@@ -19,7 +19,7 @@ public class CargoJet extends Jet implements CargoCarrier{
 
 	@Override
 	public void loadCargo() {
-		System.out.println("Shipment loaded, prepare for takeoff");
+		System.out.println(this.getModel() + ": Shipment loaded, prepare for takeoff");
 	}
 
 }

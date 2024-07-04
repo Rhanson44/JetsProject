@@ -8,7 +8,7 @@ public class PassengerJet extends Jet{
 
 	@Override
 	public void fly() {
-		double flightPath = this.getSpeed() / this.getRange();
+		double flightPath = this.getSpeed() * this.getRange();
 		System.out.println(this.toString() + " can travel " + flightPath + " miles");
 	}
 

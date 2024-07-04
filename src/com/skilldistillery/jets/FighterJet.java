@@ -8,12 +8,12 @@ public class FighterJet extends Jet implements CombatReady {
 
 	@Override
 	public void engageAttack() {
-		System.out.println("DUCK DIVE DIP AND DODGE");
+		System.out.println(this.getModel() + ": DUCK DIVE DIP AND DODGE");
 	}
 
 	@Override
 	public void fly() {
-		double flightPath = this.getSpeed() / this.getRange();
+		double flightPath = this.getRange() * this.getSpeed();
 		System.out.println(this.toString() + " can travel " + flightPath + " miles");
 	}
 

@@ -1,5 +1,8 @@
 package com.skilldistillery.jets;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Airfield {
@@ -12,17 +15,36 @@ public class Airfield {
 	}
 
 	public void initAirfield() {
-		PassengerJet passengerJet = new PassengerJet("Model", 900.0, 100, 100);
-		CargoJet cargoJet = new CargoJet("Model", 100.0, 100, 100);
-		CargoJet cargoJet2 = new CargoJet("Model", 100.0, 500, 100);
-		FighterJet fighterJet = new FighterJet("Model", 100.0, 100, 100);
-		FighterJet fighterJet2 = new FighterJet("Model", 100.0, 100, 100);
-
-		jets.add(passengerJet);
-		jets.add(cargoJet);
-		jets.add(cargoJet2);
-		jets.add(fighterJet);
-		jets.add(fighterJet2);
+		try (BufferedReader bufIn = new BufferedReader(new FileReader("Jets.txt"))) {
+			String line;
+			while ((line = bufIn.readLine()) != null) {
+				String[] jetsArr = line.split(",");
+				String type = jetsArr[0];
+				String model = jetsArr[1];
+				double speed = Double.parseDouble(jetsArr[2]);
+				int range = Integer.parseInt(jetsArr[3]);
+				long price = Long.parseLong(jetsArr[4]);
+				switch(type) {
+				case "PassengerJet":
+					PassengerJet passengerJet = new PassengerJet(model, speed, range, price);
+					jets.add(passengerJet);
+					break;
+				case "CargoJet":
+					CargoJet cargoJet = new CargoJet(model, speed, range, price);
+					jets.add(cargoJet);
+					break;
+				case "FighterJet":
+					FighterJet fighterJet = new FighterJet(model, speed, range, price);
+					jets.add(fighterJet);
+					break;
+				default:
+					type = null;
+					break;
+				}
+			}
+		} catch (IOException e) {
+			System.err.println(e);
+		}
 	}
 
 	public void listFleet() {
@@ -30,7 +52,7 @@ public class Airfield {
 			System.out.println(jet);
 		}
 	}
-	
+
 	public void allFly() {
 		for (Jet jet : jets) {
 			jet.fly();
@@ -66,7 +88,7 @@ public class Airfield {
 			}
 		}
 	}
-	
+
 	public void dogfight() {
 		for (Jet jet : jets) {
 			if (jet instanceof CargoJet) {
