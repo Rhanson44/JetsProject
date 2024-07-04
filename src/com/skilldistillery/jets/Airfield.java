@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Airfield {
 
-	// NO ADDITIONAL FIELDS
 	private ArrayList<Jet> jets;
 
 	public Airfield() {
@@ -15,6 +15,7 @@ public class Airfield {
 	}
 
 	public void initAirfield() {
+		
 		try (BufferedReader bufIn = new BufferedReader(new FileReader("Jets.txt"))) {
 			String line;
 			while ((line = bufIn.readLine()) != null) {
@@ -24,17 +25,18 @@ public class Airfield {
 				double speed = Double.parseDouble(jetsArr[2]);
 				int range = Integer.parseInt(jetsArr[3]);
 				long price = Long.parseLong(jetsArr[4]);
+				String pilot = getRandomPilot();
 				switch(type) {
 				case "PassengerJet":
-					PassengerJet passengerJet = new PassengerJet(model, speed, range, price);
+					PassengerJet passengerJet = new PassengerJet(model, speed, range, price, pilot);
 					jets.add(passengerJet);
 					break;
 				case "CargoJet":
-					CargoJet cargoJet = new CargoJet(model, speed, range, price);
+					CargoJet cargoJet = new CargoJet(model, speed, range, price, pilot);
 					jets.add(cargoJet);
 					break;
 				case "FighterJet":
-					FighterJet fighterJet = new FighterJet(model, speed, range, price);
+					FighterJet fighterJet = new FighterJet(model, speed, range, price, pilot);
 					jets.add(fighterJet);
 					break;
 				default:
@@ -119,6 +121,21 @@ public class Airfield {
 		System.out.println(jets.get(1).getClass().getSimpleName());
 		System.out.println(jets.get(3).getClass().getSimpleName());
 	}
+	
+	public String getRandomPilot() {
+		Random rand = new Random();
+		String randomPilot = "";
+		int index = rand.nextInt(5);
+		try (BufferedReader bufIn = new BufferedReader(new FileReader("Pilots.txt"))) {
+			String line;
+			while ((line = bufIn.readLine()) != null) {
+				String[] pilot = line.split(",");
+				randomPilot = pilot[index];
+			}
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+		return randomPilot;
+	}
 
-	// NO getJets();
 }

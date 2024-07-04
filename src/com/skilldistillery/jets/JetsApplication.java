@@ -60,13 +60,14 @@ public class JetsApplication {
 				keepGoing = false;
 				break;
 			}
-			
-			System.out.println("Continue? Y/N");
-			String choice = scan.next();
-			if (choice.equalsIgnoreCase("Y")) {
-				keepGoing = true;
-			} else {
-				keepGoing = false;
+			if(keepGoing) {
+				System.out.println("Continue? Y/N");
+				String choice = scan.next();
+				if (choice.equalsIgnoreCase("Y")) {
+					keepGoing = true;
+				} else {
+					keepGoing = false;
+				}
 			}
 		}
 	}
@@ -99,7 +100,6 @@ public class JetsApplication {
 		System.out.println("Select a jet to add: ");
 		airfield.printSimpleJets();
 		String jetType = scan.nextLine().toLowerCase();
-		System.out.println(jetType);
 		System.out.print("Input the model: ");
 		String model = scan.nextLine();
 		System.out.print("Enter a max speed in MPH: ");
@@ -108,18 +108,21 @@ public class JetsApplication {
 		int range = scan.nextInt();
 		System.out.print("Set the price of the aircraft: ");
 		long price = scan.nextLong();
+		scan.nextLine();
+		System.out.print("Assign a pilot: ");
+		String pilot = scan.nextLine();
 		System.out.println();
 		switch (jetType) {
 		case "passenger jet":
-			PassengerJet userPassenger = new PassengerJet(model, speed, range, price);
+			PassengerJet userPassenger = new PassengerJet(model, speed, range, price, pilot);
 			airfield.addJet(userPassenger);
 			break;
 		case "cargo jet":
-			CargoJet userCargo = new CargoJet(model, speed, range, price);
+			CargoJet userCargo = new CargoJet(model, speed, range, price, pilot);
 			airfield.addJet(userCargo);
 			break;
 		case "fighter jet":
-			FighterJet userFighter = new FighterJet(model, speed, range, price);
+			FighterJet userFighter = new FighterJet(model, speed, range, price, pilot);
 			airfield.addJet(userFighter);
 			break;
 		default:
